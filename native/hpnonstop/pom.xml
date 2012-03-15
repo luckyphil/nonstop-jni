@@ -1,0 +1,93 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.itug.nonstopjni</groupId>
+    <artifactId>nativeParent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+    
+  <groupId>org.itug.nonstopjni</groupId>
+  <artifactId>libNonstopJniNative</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>NonStop JNI - native</name>
+  <url>http://maven.apache.org</url>
+	
+	<packaging>so</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.itug.nonstopjni</groupId>
+      <artifactId>nonstop-jni-java</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>   
+  </dependencies>
+  
+	<build>
+		<plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+		<version>2.3.2</version>
+      </plugin>		
+		
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+          <!--  trigger javah -->          
+          <javahOS>hp-nonstop</javahOS>
+          
+          <compilerProvider>generic-classic</compilerProvider>
+					<compilerExecutable>/usr/bin/c89</compilerExecutable>
+					
+					<linkerExecutable>/usr/bin/eld</linkerExecutable>
+					<sources>
+						<source>
+							<directory>../src/main/native</directory>
+							<fileNames>
+								<fileName>jni_guardianprocedure.c</fileName>
+							</fileNames>
+						</source>
+					</sources>
+					
+					<compilerStartOptions>
+						<compilerStartOption>-g -I /usr/tandem/java/include -I /usr/tandem/java/include/oss -I . -I /G/system/system -Wallow_cplusplus_comments -Wextensions -D_XOPEN_SOURCE_EXTENDED=1 -Wnowarn=141,209 -Wcall_shared -Wsystype=oss -Wtarget=tns/e</compilerStartOption>
+					</compilerStartOptions>
+
+					<linkerStartOptions>
+						<linkerStartOption>-set floattype IEEE_float -set SYSTYPE OSS -set HIGHPIN ON -set CPlusPlusDialect neutral -dll -lcre -lcrtl -export_all</linkerStartOption>
+					</linkerStartOptions>
+
+				</configuration>
+				
+				<executions>
+           <execution>
+             <id>javah</id>
+             <phase>generate-sources</phase>
+             <configuration>
+          <javahOS>hp-nonstop</javahOS>
+          <javahProvider>default</javahProvider>
+          <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+          <workingDirectory>${basedir}</workingDirectory>
+          <javahOutputFileName>guardianProcedure.h</javahOutputFileName>
+          <javahClassNames>
+            <javahClassName>org.itug.nonstopjni.GuardianProcedure</javahClassName>
+          </javahClassNames>
+             </configuration>
+             <goals>
+               <goal>javah</goal>
+             </goals>
+           </execution>
+        </executions>       
+				
+			</plugin>
+		</plugins>
+	</build>
+</project>

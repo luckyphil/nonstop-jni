@@ -1,0 +1,17 @@
+First run maven as follows:
+
+mvn clean install -P hpnonstop -DskipTests=true
+
+This will bring the java and the library (.so) up to date.
+
+Then run
+mvn test 
+
+This will run the java junit tests.
+
+If there are difficulties with the system library, ensure that it is locatable via the _RLD_LIB_PATH environment variable 
+either directly or as a symbolic link from an existing lib location such as /usr/local/lib
+
+Enjoy!
+
+PAH 

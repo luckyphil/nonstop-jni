@@ -1,0 +1,60 @@
+<project>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.itug.nonstopjni</groupId>
+    <artifactId>parentProject</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>nativeParent</artifactId>
+  
+  <name>JNI - native parent</name>
+  
+  <packaging>pom</packaging>
+
+  <profiles>
+  
+ <!--   <profile>
+      <id>win32</id>
+      <activation>
+        <property>
+          <name>platform</name>
+          <value>win32</value>
+        </property>
+      </activation>
+      <modules>
+        <module>win32</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>hpux</id>
+      <activation>
+        <property>
+          <name>platform</name>
+          <value>hpux</value>
+        </property>
+      </activation>
+      <modules>
+        <module>hpux</module>
+      </modules>
+    </profile>
+-->	
+	   <profile>
+      <id>hpnonstop</id>
+      <activation>
+        <property>
+          <name>platform</name>
+          <value>hpnonstop</value>
+        </property>
+      </activation>
+      <modules>
+        <module>hpnonstop</module>
+      </modules>
+    </profile>
+
+  </profiles>
+
+</project>
